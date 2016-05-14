@@ -25,6 +25,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView bPos0,bPos1,bPos2,bPos3,bPos4,bPos10,bPos11,bPos12,bPos13,
             bPos14,bPos20,bPos21,bPos22,bPos23,bPos24,bPos30,bPos31,bPos32,bPos33,
             bPos34,bPos40,bPos41,bPos42,bPos43,bPos44;
+
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+
+            timerHandler.postDelayed(this, 3000);
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,21 +54,13 @@ public class MainActivity extends AppCompatActivity {
             timerHandler.removeCallbacks(timerRunnable);
             timerHandler.postDelayed(timerRunnable, 0);
             i++;
+            Log.i("a", "onCreate: ");
+        }
+
+        while (true){
+            //Log.i("", "onCreate: ");
         }
     }
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
-            timerHandler.postDelayed(this, 13000);
-        }
-    };
 
     public void generateNumbers(){
         for (int i = 1; i < 16; i++){
@@ -165,7 +173,9 @@ public class MainActivity extends AppCompatActivity {
         prev.add(number);
         return prev;
     }
-
-
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        timerHandler.removeCallbacks(timerRunnable);
+    }
 }
