@@ -1,6 +1,7 @@
 package chho.bingo;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList <Integer> gLine = new ArrayList<>();
     ArrayList <Integer> oLine = new ArrayList<>();
     ArrayList <Integer> prev = new ArrayList<>();
+    long startTime = 0;
     Random rng = new Random();
     private TextView bPos0,bPos1,bPos2,bPos3,bPos4,bPos10,bPos11,bPos12,bPos13,
             bPos14,bPos20,bPos21,bPos22,bPos23,bPos24,bPos30,bPos31,bPos32,bPos33,
@@ -28,8 +30,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         generateNumbers();
-
+        int i = 0;
+        while(i<5) {
+            prev = generateRandomNumber(prev);
+            Log.i("U", "" + prev.get(i));
+            startTime = System.currentTimeMillis();
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.postDelayed(timerRunnable, 0);
+            i++;
+        }
     }
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+
+            timerHandler.postDelayed(this, 13000);
+        }
+    };
 
     public void generateNumbers(){
         for (int i = 1; i < 16; i++){
@@ -133,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for(int i = 0; i < prev.size(); i++){
-            if(prev.get(i) == number){
+            int temp = (int)prev.get(i);
+            if(temp == number){
                 number = rng.nextInt(75) + 1;
                 i = 0;
             }
