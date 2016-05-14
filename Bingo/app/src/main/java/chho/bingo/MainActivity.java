@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             bPos14,bPos20,bPos21,bPos22,bPos23,bPos24,bPos30,bPos31,bPos32,bPos33,
             bPos34,bPos40,bPos41,bPos42,bPos43,bPos44;
 
+    private TextView previous;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
@@ -46,19 +47,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         generateNumbers();
+        previous = (TextView) findViewById(R.id.prevNum);
         int i = 0;
-        while(i<5) {
+        while(i<20) {
             prev = generateRandomNumber(prev);
             Log.i("U", "" + prev.get(i));
             startTime = System.currentTimeMillis();
             timerHandler.removeCallbacks(timerRunnable);
             timerHandler.postDelayed(timerRunnable, 0);
             i++;
-            Log.i("a", "onCreate: ");
-        }
-
-        while (true){
-            //Log.i("", "onCreate: ");
         }
     }
 
@@ -157,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList generateRandomNumber(ArrayList prev){
         int number = rng.nextInt(75) + 1;
+        int position = prev.size();
+        String display = "";
 
         if(prev.isEmpty()){
             prev.add(number);
@@ -170,7 +169,24 @@ public class MainActivity extends AppCompatActivity {
                 i = 0;
             }
         }
+
+
+        if(position < 5){
+            for(int j = 0; j < prev.size();j++){
+                display += prev.get(j) + " ";
+            }
+            previous.setText(display);
+        }
+        else{
+            for(int l = 0; l < 5; l++){
+                display += prev.get(position-1) + " ";
+                position--;
+            }
+            previous.setText(display);
+        }
         prev.add(number);
+
+
         return prev;
     }
     @Override
