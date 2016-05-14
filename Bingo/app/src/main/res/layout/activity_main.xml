@@ -11,6 +11,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_weight="1"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -310,12 +312,12 @@
             android:layout_gravity="center">
 
             <TextView
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:text="Previous Numbers"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"/>
 
             <TextView
@@ -323,16 +325,16 @@
                 android:id="@+id/prevNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:text="Hello"/>
 
         </LinearLayout>
-        
 
     </LinearLayout>
 
 
     <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -353,13 +355,6 @@
             android:layout_marginLeft="10dp"/>
 
     </LinearLayout>
-    
-
-
-
-
-
-
 
 
 </LinearLayout>
