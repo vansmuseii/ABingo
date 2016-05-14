@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList generateRandomNumber(ArrayList prev){
         int number = rng.nextInt(75) + 1;
-        int position = prev.size();
+        int position = prev.size() - 1;
         String display = "";
 
         if(prev.isEmpty()){
@@ -173,13 +173,32 @@ public class MainActivity extends AppCompatActivity {
 
         if(position < 5){
             for(int j = 0; j < prev.size();j++){
-                display += prev.get(j) + " ";
+
+                if((int)prev.get(j) < 16)
+                display += "B" + prev.get(j) + " ";
+                else if((int)prev.get(j) < 31)
+                    display += "I" + prev.get(j) + " ";
+                else if((int)prev.get(j) < 36)
+                    display += "N" + prev.get(j) + " ";
+                else if((int)prev.get(j) < 61)
+                    display += "G" + prev.get(j) + " ";
+                else if((int)prev.get(j) < 76)
+                    display += "O" + prev.get(j) + " ";
             }
             previous.setText(display);
         }
         else{
             for(int l = 0; l < 5; l++){
-                display += prev.get(position-1) + " ";
+                if((int)prev.get(position) < 16)
+                    display += "B" + prev.get(position) + " ";
+                else if((int)prev.get(position) < 31)
+                    display += "I" + prev.get(position) + " ";
+                else if((int)prev.get(position) < 36)
+                    display += "N" + prev.get(position) + " ";
+                else if((int)prev.get(position) < 61)
+                    display += "G" + prev.get(position) + " ";
+                else if((int)prev.get(position) < 76)
+                    display += "O" + prev.get(position) + " ";
                 position--;
             }
             previous.setText(display);
