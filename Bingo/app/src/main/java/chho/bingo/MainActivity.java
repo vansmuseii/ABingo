@@ -1,5 +1,6 @@
 package chho.bingo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList <Integer> nLine = new ArrayList<>();
     ArrayList <Integer> gLine = new ArrayList<>();
     ArrayList <Integer> oLine = new ArrayList<>();
+    ArrayList <Integer> prev = new ArrayList<>();
+    Random rng = new Random();
     private TextView bPos0,bPos1,bPos2,bPos3,bPos4,bPos10,bPos11,bPos12,bPos13,
             bPos14,bPos20,bPos21,bPos22,bPos23,bPos24,bPos30,bPos31,bPos32,bPos33,
             bPos34,bPos40,bPos41,bPos42,bPos43,bPos44;
@@ -119,5 +123,25 @@ public class MainActivity extends AppCompatActivity {
         bPos44.setText(""+oLine.get(4));
 
     }
+
+    public ArrayList generateRandomNumber(ArrayList prev){
+        int number = rng.nextInt(75) + 1;
+
+        if(prev.isEmpty()){
+            prev.add(number);
+            return prev;
+        }
+
+        for(int i = 0; i < prev.size(); i++){
+            if(prev.get(i) == number){
+                number = rng.nextInt(75) + 1;
+                i = 0;
+            }
+        }
+        prev.add(number);
+        return prev;
+    }
+
+
 
 }
